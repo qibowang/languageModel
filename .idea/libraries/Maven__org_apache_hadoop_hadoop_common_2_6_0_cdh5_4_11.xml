@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.hadoop:hadoop-common:2.6.0-cdh5.4.11">
+    <CLASSES>
+      <root url="jar://F:/maven/apache-maven-3.5.0/repository/org/apache/hadoop/hadoop-common/2.6.0-cdh5.4.11/hadoop-common-2.6.0-cdh5.4.11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/maven/apache-maven-3.5.0/repository/org/apache/hadoop/hadoop-common/2.6.0-cdh5.4.11/hadoop-common-2.6.0-cdh5.4.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/maven/apache-maven-3.5.0/repository/org/apache/hadoop/hadoop-common/2.6.0-cdh5.4.11/hadoop-common-2.6.0-cdh5.4.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
