@@ -2,7 +2,6 @@
   <library name="Maven: asm:asm:3.1">
     <CLASSES>
       <root url="jar://F:/maven/apache-maven-3.5.0/repository/asm/asm/3.1/asm-3.1.jar!/" />
-      <root url="jar://F:/jar/hadoop-lzo-0.4.15-cdh5.4.11/hadoop-lzo-0.4.15-cdh5.4.11.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://F:/maven/apache-maven-3.5.0/repository/asm/asm/3.1/asm-3.1-javadoc.jar!/" />

@@ -2,6 +2,8 @@ package com.lm.driver;
 
 import java.io.IOException;
 
+import com.lm.katz.bow.*;
+import com.lm.katz.lm.*;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -21,16 +23,8 @@ import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import com.hadoop.compression.lzo.LzoCodec;
-import com.lm.smooth.katz.bow.BowMapper;
-import com.lm.smooth.katz.bow.BowReducer;
-import com.lm.smooth.katz.bow.Join;
-import com.lm.smooth.katz.bow.Prob;
-import com.lm.smooth.katz.bow.Suffix;
-import com.lm.smooth.katz.lm.LMMapperBow;
-import com.lm.smooth.katz.lm.LMMapperProb;
-import com.lm.smooth.katz.lm.LMReducer;
-import com.lm.smooth.katz.lm.MyComparator;
-import com.lm.smooth.katz.lm.MyCounter;
+
+
 
 
 public class Step2Driver {
@@ -88,9 +82,9 @@ public class Step2Driver {
 			FileSystem fs = FileSystem.get(conf);
 			
 			Job job = Job.getInstance(conf,"join1");
-			System.out.println(job.getJobName()+"is running!!!");
+			System.out.println(job.getJobName()+" is running!!!");
 			job.setJarByClass(Step2Driver.class);
-			job.setReducerClass(Join.class);
+			job.setReducerClass(SuffixJoinProb.class);
 			job.setNumReduceTasks(tasks);
 			
 			MultipleInputs.addInputPath(job, new Path(gtPath), SequenceFileInputFormat.class,Suffix.class);
@@ -156,12 +150,12 @@ public class Step2Driver {
 			Job finalJob = Job.getInstance(conf,"final job");
 			System.out.println(finalJob.getJobName()+"is running!!!");
 			finalJob.setJarByClass(Step2Driver.class);
-			finalJob.setReducerClass(LMReducer.class);
+			finalJob.setReducerClass(LMReducerJoin.class);
 			finalJob.setSortComparatorClass(MyComparator.class);
 			finalJob.setNumReduceTasks(1);//此处设为1速度会有所降低  但是生成的文件是排序好的 直接可以用来转换成arpa格式
 			
 			MultipleInputs.addInputPath(finalJob, new Path(bowPath), SequenceFileInputFormat.class, LMMapperBow.class);
-			MultipleInputs.addInputPath(finalJob, new Path(gtPath), SequenceFileInputFormat.class,LMMapperProb.class);
+			MultipleInputs.addInputPath(finalJob, new Path(gtPath), SequenceFileInputFormat.class, LMMapperProb.class);
 			
 			outputPath=new Path(finalPath);
 			if(fs.exists(outputPath)){
