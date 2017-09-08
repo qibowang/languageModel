@@ -1,6 +1,6 @@
 package com.lm.katz.bow;
 
-import org.apache.hadoop.io.DoubleWritable;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 

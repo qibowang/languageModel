@@ -1,11 +1,10 @@
 package com.lm.katz.lm;
 
-import org.apache.hadoop.io.DoubleWritable;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
 
 /**
  * Created by root on 2017/9/1.
