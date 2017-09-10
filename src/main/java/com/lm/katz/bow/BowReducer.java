@@ -10,11 +10,12 @@ import java.io.IOException;
  * Created by root on 2017/9/1.
  */
 public class BowReducer extends Reducer<Text,Text,Text,DoubleWritable> {
-	private double prefixProbSum=0.0;
-	private double suffixProbSum=0.0;
+
 	private DoubleWritable resValue = new DoubleWritable();
 	@Override
 	protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+		double prefixProbSum=0.0;
+		double suffixProbSum=0.0;
 		for(Text value:values){
 			String[] temp=value.toString().split("\t");
 			if(temp.length==2){
