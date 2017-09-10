@@ -23,7 +23,7 @@ public class SuffixJoinProb extends Reducer<Text,Text,Text,Text>{
 		Configuration conf = context.getConfiguration();
 		List<Text> joinValues = new ArrayList<Text>();
 		for(Text value:values){
-			String temp[]=value.toString().split(" ");
+			String temp[]=value.toString().split("\t");
 			if(temp[0].equals("suffix")){
 				joinValues.add(WritableUtils.clone(value,conf));
 			}else if(temp[0].equals("prob")){
@@ -31,9 +31,9 @@ public class SuffixJoinProb extends Reducer<Text,Text,Text,Text>{
 			}
 		}
 		for(Text value:joinValues){
-			String temp[]=value.toString().split(" ");
-			ngram=temp[0];
-			prob=temp[1];
+			String temp[]=value.toString().split("\t");
+			ngram=temp[1];
+			prob=temp[2];
 			resKey.set(ngram);
 			resValue.set((prob+"\t"+suffixProb).trim());
 			context.write(resKey,resValue);

@@ -14,7 +14,7 @@ public class BowMapper extends Mapper<Text,Text,Text,Text>{
 
 	@Override
 	protected void map(Text key, Text value, Context context) throws IOException, InterruptedException {
-		super.map(key, value, context);
+
 		String ngram=key.toString();
 		int len=ngram.split(" ").length;
 

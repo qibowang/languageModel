@@ -52,6 +52,7 @@ public class LMReducerJoin extends Reducer<Text,Text,Text,Text>{
 		resKey.set(String.valueOf(prob));
 		resValue.set((key.toString()+"\t"+bow).trim());
 
+		context.write(resKey,resValue);
 
 
 	}

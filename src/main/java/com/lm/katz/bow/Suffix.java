@@ -22,7 +22,7 @@ public class Suffix extends Mapper<Text,DoubleWritable,Text,Text>{
 			int index=ngram.indexOf(" ");
 			String suffix=ngram.substring(index+1);
 			resKey.set(suffix);
-			resValue.set(fileFlag+"\t"+ngram+"\t");
+			resValue.set(fileFlag+"\t"+ngram+"\t"+String.valueOf(value.get()));
 			context.write(resKey,resValue);
 			
 		}
