@@ -29,7 +29,7 @@ public class BowReducer extends Reducer<Text,Text,Text,DoubleWritable> {
 		double numerator=0.0;
 		double denominator=0.0;
 		if(prefixProbSum<1){
-			numerator=Math.log1p(1-prefixProbSum);
+			numerator=Math.log10(1-prefixProbSum);
 		}
 		if(suffixProbSum<1){
 			denominator=Math.log10(1-suffixProbSum);

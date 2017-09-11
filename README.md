@@ -6,3 +6,7 @@
 第三次提交：修改了多个ngram可能含有相同后缀而未分别处理的bug
 
 第四次提交：删除了tools文件夹以及无用的import语句
+
+
+
+第六次提交：修改了BowReducer中的bug
