@@ -1,6 +1,6 @@
 package com.lm.gtSmooth;
 
-import com.lm.tools.StrIntercept;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.*;
@@ -75,7 +75,8 @@ public class GTMapper extends Mapper<Text,LongWritable,Text,Text>{
 
 			context.write(outKey,outValue);
 		}else{
-			String prefix= StrIntercept.getPrefix(ngram);
+			int index=ngram.lastIndexOf(" ");
+			String prefix= ngram.substring(0,index);
 			outKey.set(prefix);
 			context.write(outKey,outValue);
 		}
