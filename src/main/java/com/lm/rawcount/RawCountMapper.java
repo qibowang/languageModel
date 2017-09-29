@@ -24,7 +24,7 @@ public class RawCountMapper extends Mapper<LongWritable,Text,Text,VIntWritable> 
 	//lrLabel 1  左边
 	//lrLabel 2 右边
 	//lrLabel 3 中间
-
+	//lrLabel 4 中间（新） 此时的order只能是3 或者5 不进行step2
 
 	@Override
 	protected void setup(Context context) throws IOException, InterruptedException {
@@ -112,6 +112,15 @@ public class RawCountMapper extends Mapper<LongWritable,Text,Text,VIntWritable> 
 								context.write(resKey, one);
 							}
 						}
+					}else if(lrLabel==4){
+						int wordNum = ngram.split(" ").length;
+						if(wordNum==order){
+							int rightIndex=order/2;
+							if(leftJudge(ngram, rightIndex, SEPARATOR, lrLabel)){
+								resKey.set(ngram);
+								context.write(resKey, one);
+							}
+						}
 					}else{
 						break;
 					}
@@ -173,6 +182,10 @@ public class RawCountMapper extends Mapper<LongWritable,Text,Text,VIntWritable> 
 		}else if(lrLabel==2){
 			condition=firstIndex==lastIndex&&firstIndex==rightIndex;
 		}else if(lrLabel==3){
+			String temp[]=ngram.split(" ");
+			String middleStr=temp[rightIndex];
+			condition=firstIndex==lastIndex&&middleStr.charAt(0)==separator;
+		}else if(lrLabel==4){
 			String temp[]=ngram.split(" ");
 			String middleStr=temp[rightIndex];
 			condition=firstIndex==lastIndex&&middleStr.charAt(0)==separator;
